@@ -1,0 +1,5 @@
+
+Silhouette Score: 0.2423
+Davies-Bouldin Index: 1.5702
+Inertia: 658335.0813
+Best k: 3
