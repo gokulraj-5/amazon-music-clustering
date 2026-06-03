@@ -1,27 +1,27 @@
 # 🎵 Amazon Music Clustering using K-Means
 
-## 📌 Project Overview
+## 📖 Project Overview
 
-With millions of songs available on music streaming platforms, manually categorizing tracks based on their characteristics is inefficient. This project uses **Unsupervised Machine Learning (K-Means Clustering)** to automatically group songs with similar audio characteristics.
+Music streaming platforms contain millions of songs with diverse audio characteristics. Manually organizing these songs into meaningful groups is difficult and time-consuming.
 
-The model analyzes audio features such as danceability, energy, loudness, acousticness, tempo, and valence to discover meaningful patterns and organize songs into distinct clusters.
-
----
-
-## 🎯 Objectives
-
-* Perform Exploratory Data Analysis (EDA) on Amazon Music song data.
-* Select relevant audio features for clustering.
-* Normalize features using StandardScaler.
-* Determine the optimal number of clusters using the Elbow Method and Silhouette Score.
-* Apply K-Means Clustering to group similar songs.
-* Visualize clusters using PCA.
-* Interpret cluster characteristics based on audio features.
-* Export the final clustered dataset.
+This project applies **Unsupervised Machine Learning (K-Means Clustering)** to automatically group songs based on their audio features such as danceability, energy, loudness, acousticness, tempo, and valence. The resulting clusters help identify songs with similar musical characteristics and listening experiences.
 
 ---
 
-## 📂 Dataset Information
+## 🎯 Problem Statement
+
+The goal of this project is to automatically discover patterns in music data and group similar songs together without using predefined labels or genres.
+
+By analyzing audio features, the model creates clusters that can be used for:
+
+* Personalized playlist generation
+* Music recommendation systems
+* Song discovery
+* Artist and music trend analysis
+
+---
+
+## 📂 Dataset
 
 The dataset contains song-level and artist-level information, including:
 
@@ -36,15 +36,16 @@ The dataset contains song-level and artist-level information, including:
 * Liveness
 * Valence
 * Tempo
-* Duration
+* Duration (ms)
 
-### Additional Information
+### Additional Features
 
-* Song Name
-* Artist Name
-* Popularity Metrics
+* Song Popularity
+* Artist Popularity
 * Followers
 * Release Date
+* Song Name
+* Artist Name
 * Genre Information
 
 ---
@@ -58,23 +59,26 @@ The dataset contains song-level and artist-level information, including:
 * Seaborn
 * Scikit-Learn
 * PCA (Principal Component Analysis)
-* Streamlit
+* Jupyter Notebook
 
 ---
 
 ## 🔍 Project Workflow
 
-### 1. Data Exploration
+### 1. Data Exploration (EDA)
 
 * Loaded dataset
-* Inspected data structure
+* Examined dataset structure
 * Checked missing values
-* Removed duplicates
+* Removed duplicate records
 * Visualized feature distributions
+* Generated correlation heatmap
+
+---
 
 ### 2. Feature Selection
 
-Selected the following audio features:
+Selected the following audio features for clustering:
 
 ```python
 audio_features = [
@@ -91,69 +95,96 @@ audio_features = [
 ]
 ```
 
+These features describe the rhythm, mood, energy, and acoustic characteristics of songs.
+
+---
+
 ### 3. Data Preprocessing
 
-* Handled missing values
+* Removed missing values
 * Standardized numerical features using StandardScaler
+* Prepared data for clustering
 
-### 4. Clustering
+---
 
-* Applied K-Means Clustering
-* Used Elbow Method to identify suitable K values
-* Evaluated clusters using Silhouette Score
+### 4. K-Means Clustering
+
+* Applied K-Means clustering
+* Used the Elbow Method to identify suitable cluster counts
+* Evaluated cluster quality using Silhouette Score
+
+---
 
 ### 5. Dimensionality Reduction
 
-* Applied PCA for 2D visualization of clusters
-
-### 6. Cluster Interpretation
-
-Analyzed average feature values within each cluster to understand the musical characteristics represented by each group.
+Applied Principal Component Analysis (PCA) to visualize clusters in two dimensions.
 
 ---
 
-## 📊 Evaluation Metrics
+### 6. Cluster Evaluation
 
-### Silhouette Score
+The clustering model was evaluated using:
 
-Measures how similar a song is to its own cluster compared to other clusters.
+* Silhouette Score
+* Davies-Bouldin Index
+* Inertia
 
-### Davies-Bouldin Index
+### Results
 
-Measures cluster separation and compactness.
-
-### Inertia
-
-Measures within-cluster variation.
+| Metric               | Value       |
+| -------------------- | ----------- |
+| Silhouette Score     | 0.2423      |
+| Davies-Bouldin Index | 1.5702      |
+| Inertia              | 658335.0813 |
 
 ---
 
-## 📈 Results
+## 📊 Cluster Analysis
 
-The model successfully grouped songs into meaningful clusters based on audio characteristics.
+The model successfully identified three meaningful song groups:
 
-Example cluster patterns discovered:
+### Cluster 0 – Speech-Oriented Tracks
 
-### Cluster 0
+Characteristics:
 
-* High speechiness
+* Very high speechiness
 * Shorter duration
-* Spoken-word / speech-heavy tracks
+* Spoken-word and dialogue-heavy content
 
-### Cluster 1
+---
+
+### Cluster 1 – Acoustic & Chill Songs
+
+Characteristics:
 
 * High acousticness
 * Lower energy
-* Chill and acoustic-oriented songs
+* Relaxed and mellow musical style
 
-### Cluster 2
+---
+
+### Cluster 2 – High-Energy Dance Tracks
+
+Characteristics:
 
 * High energy
 * High danceability
-* Fast tempo
-* Dance and party-oriented tracks
+* Faster tempo
+* Suitable for workouts, parties, and mainstream listening
 
-These clusters demonstrate that songs with similar audio properties can be automatically grouped without using genre labels.
+---
+
+## 📈 Visualizations
+
+The project includes:
+
+* Feature Distribution Plots
+* Correlation Heatmap
+* Elbow Method Curve
+* Silhouette Analysis
+* PCA Cluster Visualization
+* Cluster Distribution Chart
+* Cluster Feature Comparison Heatmap
 
 ---
 
@@ -163,9 +194,8 @@ These clusters demonstrate that songs with similar audio properties can be autom
 amazon-music-clustering/
 │
 ├── Amazon_Music_Clustering.ipynb
-├── app.py
-├── requirements.txt
 ├── README.md
+├── requirements.txt
 │
 ├── outputs/
 │   ├── clustered_music.csv
@@ -177,32 +207,74 @@ amazon-music-clustering/
 
 ---
 
-## 🚀 Streamlit Application
+## 🚀 How to Run
 
-The project also includes a Streamlit application that allows users to:
-
-* Upload a dataset
-* Select the number of clusters
-* Visualize PCA cluster plots
-* View cluster profiles
-* Explore clustered songs
-* Download clustered results
-
-Run the application:
+### Clone Repository
 
 ```bash
-streamlit run app.py
+git clone <repository-url>
+cd amazon-music-clustering
 ```
+
+### Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+### Activate Environment
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Launch Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+Open:
+
+```text
+Amazon_Music_Clustering.ipynb
+```
+
+and run all cells.
 
 ---
 
-## 📌 Future Improvements
+## 💡 Key Learnings
 
-* Song recommendation system
-* Similar song search
+Through this project, I gained hands-on experience in:
+
+* Exploratory Data Analysis (EDA)
+* Feature Selection
+* Data Standardization
+* K-Means Clustering
+* Elbow Method
+* Silhouette Score Analysis
+* PCA Visualization
+* Cluster Interpretation
+* Unsupervised Machine Learning
+
+---
+
+## 🔮 Future Improvements
+
+* Streamlit dashboard for interactive exploration
+* Song recommendation engine
+* Similar song search using cosine similarity
 * Interactive Plotly visualizations
-* Genre inference analysis
-* Model comparison (K-Means vs DBSCAN)
+* Comparison with DBSCAN and Hierarchical Clustering
 * Cloud deployment
 
 ---
@@ -211,6 +283,6 @@ streamlit run app.py
 
 **Gokulraj V**
 
-AI/ML Enthusiast | Machine Learning | Deep Learning | NLP | Generative AI
+Machine Learning | Deep Learning | NLP | Generative AI
 
 GitHub: https://github.com/gokulraj-5
